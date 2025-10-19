@@ -68,6 +68,11 @@ export const getTodayData = (username) => {
   // Check if it's a new day
   const todayDate = new Date().toISOString().split('T')[0];
   if (!todayData || todayData.date !== todayDate) {
+    // Save previous day to history if it exists and has data
+    if (todayData && todayData.meals.length > 0) {
+      addToHistory(username, todayData);
+    }
+    
     // Reset for new day
     const newTodayData = {
       date: todayDate,
@@ -221,4 +226,18 @@ export const removeRecentMeal = (username, mealId) => {
   const updatedMeals = recentMeals.filter(meal => meal.id !== mealId);
   localStorage.setItem(STORAGE_KEYS.RECENT_MEALS(username), JSON.stringify(updatedMeals));
   return updatedMeals;
+};
+
+// Get recent history (last 7 days)
+export const getRecentHistory = (username) => {
+  const history = getUserHistory(username);
+  return history.slice(-7); // Last 7 days
+};
+
+// Get history for a specific date range
+export const getHistoryRange = (username, startDate, endDate) => {
+  const history = getUserHistory(username);
+  return history.filter(day => 
+    day.date >= startDate && day.date <= endDate
+  );
 };
