@@ -45,6 +45,20 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
     setShowVoiceInput(false);
   };
 
+  const handleMealAdded = (meal) => {
+    setTodayData(getTodayData(username));
+    setMealAnalysis(null);
+    
+    // Check if any goals were achieved
+    checkGoalAchievement();
+    
+    // Show success animation
+    setTimeout(() => {
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 3000);
+    }, 100);
+  };
+
   const handleMealConfirmed = (mealData) => {
     try {
       const newMeal = addMeal(username, mealData);
@@ -206,6 +220,10 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
                 >
                   Start Voice Input
                 </button>
+                <QuickAdd 
+                  onMealAdded={handleMealAdded}
+                  onError={setError}
+                />
               </div>
             )}
           </div>
