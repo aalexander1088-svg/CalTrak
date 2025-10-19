@@ -209,8 +209,8 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
               />
             ) : (
               <div className="card text-center hover-lift-glow">
-                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
-                  <img src="/logo.png" alt="CalTrak Logo" className="w-16 h-16 object-contain" />
+                <div className="w-24 h-16 bg-white rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
+                  <img src="/logo.png" alt="CalTrak Logo" className="w-20 h-12 object-contain" />
                 </div>
                 <h3 className="text-subheading mb-3">Add a Meal</h3>
                 <p className="text-body mb-6">
