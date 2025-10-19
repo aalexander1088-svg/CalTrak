@@ -120,7 +120,7 @@ const GoalSetup = ({ username, onComplete }) => {
       <div className="card max-w-lg w-full">
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
-            <img src="/logo.png" alt="CalTrak Logo" className="w-12 h-12" />
+            <img src="/logo.png" alt="CalTrak Logo" className="w-16 h-16 object-contain" />
           </div>
           <h1 className="text-serif-heading mb-3">Set Your Goals</h1>
           <p className="text-caption">Configure your daily nutrition targets</p>

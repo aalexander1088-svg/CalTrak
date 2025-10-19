@@ -65,7 +65,7 @@ const UserSelection = ({ onUserSelect }) => {
       <div className="card max-w-md w-full">
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
-            <img src="/logo.png" alt="CalTrak Logo" className="w-12 h-12" />
+            <img src="/logo.png" alt="CalTrak Logo" className="w-16 h-16 object-contain" />
           </div>
           <h1 className="text-serif-heading mb-3">CalTrak</h1>
           <p className="text-caption">Voice-based calorie tracking</p>
@@ -79,26 +79,18 @@ const UserSelection = ({ onUserSelect }) => {
                 <div
                   key={username}
                   className="group flex items-center justify-between p-4 bg-white hover:bg-gray-50 rounded-xl hover-lift-glow border border-gray-100 cursor-pointer"
+                  onClick={() => handleSelectUser(username)}
                 >
-                  <button
-                    onClick={() => handleSelectUser(username)}
-                    className="flex items-center flex-1"
-                  >
+                  <div className="flex items-center flex-1">
                     <User className="w-5 h-5 text-gray-500 mr-3" />
                     <span className="font-semibold text-gray-800">{username}</span>
-                  </button>
+                  </div>
                   
                   <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => handleSelectUser(username)}
-                      className="p-2 text-gray-500 hover:text-[#4CAF50] transition-colors"
-                      title="Login"
-                    >
-                      <LogIn className="w-4 h-4" />
-                    </button>
+                    <LogIn className="w-4 h-4 text-gray-400" />
                     <button
                       onClick={(e) => handleDeleteUser(username, e)}
-                      className="p-2 text-gray-500 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                      className="p-1 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
                       title="Delete user"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -113,7 +105,7 @@ const UserSelection = ({ onUserSelect }) => {
         {!showNewUserForm ? (
           <button
             onClick={() => setShowNewUserForm(true)}
-            className="w-full btn-primary flex items-center justify-center"
+            className="w-full btn-primary flex items-center justify-center hover-lift"
           >
             <Plus className="w-5 h-5 mr-2" />
             Create New User
