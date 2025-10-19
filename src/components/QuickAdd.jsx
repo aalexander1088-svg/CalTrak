@@ -66,15 +66,15 @@ const QuickAdd = ({ onMealAdded, onError }) => {
           Quick Add Recent Meal
         </button>
       ) : (
-        <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-slate-200 flex items-center">
-              <Clock className="w-5 h-5 mr-2" />
+        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-subheading flex items-center">
+              <Clock className="w-5 h-5 mr-2 text-[#4CAF50]" />
               Quick Add Recent Meals
             </h3>
             <button
               onClick={() => setShowQuickAdd(false)}
-              className="text-slate-400 hover:text-slate-200"
+              className="text-gray-500 hover:text-gray-700 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -84,21 +84,21 @@ const QuickAdd = ({ onMealAdded, onError }) => {
             {recentMeals.map((meal) => (
               <div
                 key={meal.id}
-                className="bg-slate-700/50 rounded-lg p-3 border border-slate-600/50"
+                className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover-lift-glow"
               >
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex-1">
-                    <h4 className="font-medium text-slate-200">{meal.name}</h4>
-                    <p className="text-sm text-slate-400">{formatTimeAgo(meal.timestamp)}</p>
+                    <h4 className="font-semibold text-gray-800">{meal.name}</h4>
+                    <p className="text-sm text-gray-500">{formatTimeAgo(meal.timestamp)}</p>
                   </div>
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => handleQuickAdd(meal)}
                       disabled={isAdding}
-                      className="btn-primary text-sm py-1 px-3 flex items-center"
+                      className="btn-primary text-sm py-2 px-4 flex items-center hover-lift"
                     >
                       {isAdding ? (
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-1"></div>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full loading-spin mr-1"></div>
                       ) : (
                         <Plus className="w-4 h-4 mr-1" />
                       )}
@@ -106,7 +106,7 @@ const QuickAdd = ({ onMealAdded, onError }) => {
                     </button>
                     <button
                       onClick={() => handleRemoveRecent(meal.id)}
-                      className="text-slate-400 hover:text-red-400 p-1"
+                      className="text-gray-500 hover:text-red-500 p-2 rounded-lg hover:bg-gray-100 transition-colors"
                       title="Remove from recent"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -114,36 +114,36 @@ const QuickAdd = ({ onMealAdded, onError }) => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-4 gap-2 text-xs">
+                <div className="grid grid-cols-4 gap-3 text-sm mb-3">
                   <div className="text-center">
-                    <div className="text-slate-400">Calories</div>
-                    <div className="font-medium text-slate-200">{meal.totalCalories}</div>
+                    <div className="text-gray-500 text-xs">Calories</div>
+                    <div className="font-semibold text-gray-800">{meal.totalCalories}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-slate-400">Protein</div>
-                    <div className="font-medium text-slate-200">{meal.totalProtein}g</div>
+                    <div className="text-gray-500 text-xs">Protein</div>
+                    <div className="font-semibold text-gray-800">{meal.totalProtein}g</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-slate-400">Carbs</div>
-                    <div className="font-medium text-slate-200">{meal.totalCarbs}g</div>
+                    <div className="text-gray-500 text-xs">Carbs</div>
+                    <div className="font-semibold text-gray-800">{meal.totalCarbs}g</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-slate-400">Fat</div>
-                    <div className="font-medium text-slate-200">{meal.totalFat}g</div>
+                    <div className="text-gray-500 text-xs">Fat</div>
+                    <div className="font-semibold text-gray-800">{meal.totalFat}g</div>
                   </div>
                 </div>
 
-                <div className="mt-2 text-xs text-slate-500">
-                  {meal.items.length} item{meal.items.length !== 1 ? 's' : ''}: {meal.items.map(item => item.name).join(', ')}
+                <div className="text-sm text-gray-600 bg-white rounded-lg p-3 border border-gray-200">
+                  <span className="font-medium">{meal.items.length} item{meal.items.length !== 1 ? 's' : ''}:</span> {meal.items.map(item => item.name).join(', ')}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-4 text-center">
+          <div className="mt-6 text-center">
             <button
               onClick={() => setShowQuickAdd(false)}
-              className="btn-secondary text-sm py-2 px-4"
+              className="btn-secondary text-sm py-2 px-6 hover-lift"
             >
               Close
             </button>
