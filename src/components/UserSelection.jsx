@@ -61,44 +61,44 @@ const UserSelection = ({ onUserSelect }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center p-4">
       <div className="card max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <User className="w-8 h-8 text-white" />
+          <div className="w-20 h-20 bg-[#4CAF50] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <User className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-200 mb-2">CalTrak</h1>
-          <p className="text-slate-400">Voice-based calorie tracking</p>
+          <h1 className="text-serif-heading mb-3">CalTrak</h1>
+          <p className="text-caption">Voice-based calorie tracking</p>
         </div>
 
         {users.length > 0 && (
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold text-slate-200 mb-4">Select User</h2>
-            <div className="space-y-2">
+          <div className="mb-8">
+            <h2 className="text-subheading mb-6">Select User</h2>
+            <div className="space-y-3">
               {users.map((username) => (
                 <div
                   key={username}
-                  className="group flex items-center justify-between p-4 bg-slate-700/50 hover:bg-slate-600/50 rounded-lg transition-colors duration-200"
+                  className="group flex items-center justify-between p-4 bg-white hover:bg-gray-50 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md border border-gray-100"
                 >
                   <button
                     onClick={() => handleSelectUser(username)}
                     className="flex items-center flex-1"
                   >
-                    <User className="w-5 h-5 text-slate-400 mr-3" />
-                    <span className="font-medium text-slate-200">{username}</span>
+                    <User className="w-5 h-5 text-gray-500 mr-3" />
+                    <span className="font-semibold text-gray-800">{username}</span>
                   </button>
                   
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => handleSelectUser(username)}
-                      className="p-2 text-slate-400 hover:text-slate-200 transition-colors"
+                      className="p-2 text-gray-500 hover:text-[#4CAF50] transition-colors"
                       title="Login"
                     >
                       <LogIn className="w-4 h-4" />
                     </button>
                     <button
                       onClick={(e) => handleDeleteUser(username, e)}
-                      className="p-2 text-slate-400 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
+                      className="p-2 text-gray-500 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
                       title="Delete user"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -119,9 +119,9 @@ const UserSelection = ({ onUserSelect }) => {
             Create New User
           </button>
         ) : (
-          <form onSubmit={handleCreateUser} className="space-y-4">
+          <form onSubmit={handleCreateUser} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-slate-300 mb-2">
+              <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-3">
                 Username
               </label>
               <input
@@ -134,10 +134,10 @@ const UserSelection = ({ onUserSelect }) => {
                 autoFocus
               />
               {error && (
-                <p className="mt-2 text-sm text-red-400">{error}</p>
+                <p className="mt-3 text-sm text-red-500">{error}</p>
               )}
             </div>
-            <div className="flex space-x-3">
+            <div className="flex space-x-4">
               <button
                 type="button"
                 onClick={() => {

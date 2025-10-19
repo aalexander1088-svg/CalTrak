@@ -116,24 +116,24 @@ const GoalSetup = ({ username, onComplete }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center p-4">
       <div className="card max-w-lg w-full">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Target className="w-8 h-8 text-white" />
+          <div className="w-20 h-20 bg-[#4CAF50] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <Target className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Set Your Goals</h1>
-          <p className="text-gray-600">Configure your daily nutrition targets</p>
+          <h1 className="text-serif-heading mb-3">Set Your Goals</h1>
+          <p className="text-caption">Configure your daily nutrition targets</p>
         </div>
 
         {/* AI Recommendation Section */}
         <div className="mb-8">
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6 border border-purple-200">
+          <div className="bg-gradient-to-r from-[#E8F5E8] to-[#F0F9F0] rounded-2xl p-6 border border-[#4CAF50]/20">
             <div className="flex items-center mb-4">
-              <Sparkles className="w-6 h-6 text-purple-600 mr-2" />
-              <h2 className="text-lg font-semibold text-gray-900">Get AI-Powered Recommendations</h2>
+              <Sparkles className="w-6 h-6 text-[#4CAF50] mr-2" />
+              <h2 className="text-subheading">Get AI-Powered Recommendations</h2>
             </div>
-            <p className="text-gray-600 mb-4">
+            <p className="text-body mb-6">
               Tell us about yourself and we'll recommend personalized nutrition goals based on your objectives.
             </p>
             
@@ -148,7 +148,7 @@ const GoalSetup = ({ username, onComplete }) => {
             ) : (
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Gender
                   </label>
                   <select
@@ -163,7 +163,7 @@ const GoalSetup = ({ username, onComplete }) => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
                       Your Weight (lbs)
                     </label>
                     <input
@@ -178,7 +178,7 @@ const GoalSetup = ({ username, onComplete }) => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
                       Activity Level
                     </label>
                     <select
@@ -194,7 +194,7 @@ const GoalSetup = ({ username, onComplete }) => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Primary Goal
                   </label>
                   <select
@@ -210,7 +210,7 @@ const GoalSetup = ({ username, onComplete }) => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
                     Additional Notes (optional)
                   </label>
                   <textarea
@@ -317,38 +317,32 @@ const GoalSetup = ({ username, onComplete }) => {
           </div>
         )}
 
-        <div className="space-y-6">
+        <h2 className="text-subheading mb-6">Daily Targets</h2>
+        <div className="space-y-4 mb-8">
           {nutrients.map((nutrient) => (
-            <div key={nutrient.key} className="bg-gray-50 rounded-lg p-4">
-              <div className="flex items-center justify-between mb-3">
+            <div key={nutrient.key} className="goal-card">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
-                  <div className={`w-4 h-4 bg-${nutrient.color}-500 rounded-full mr-3`}></div>
-                  <span className="font-medium text-gray-900">{nutrient.label}</span>
-                </div>
-                <label className="flex items-center">
                   <input
                     type="checkbox"
                     checked={trackedNutrients[nutrient.key]}
                     onChange={() => handleNutrientToggle(nutrient.key)}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    className="w-5 h-5 text-[#4CAF50] border-gray-300 rounded focus:ring-[#4CAF50] mr-3"
                   />
-                  <span className="ml-2 text-sm text-gray-600">Track</span>
-                </label>
-              </div>
-              
-              {trackedNutrients[nutrient.key] && (
+                  <label className="text-body font-semibold">{nutrient.label}</label>
+                </div>
                 <div className="flex items-center">
                   <input
                     type="number"
                     value={goals[nutrient.key]}
                     onChange={(e) => handleGoalChange(nutrient.key, e.target.value)}
-                    className="flex-1 input-field mr-3"
+                    className="input-field w-24 text-right mr-3"
+                    disabled={!trackedNutrients[nutrient.key]}
                     min="0"
-                    step="1"
                   />
-                  <span className="text-sm text-gray-600">{nutrient.unit}</span>
+                  <span className="text-caption">{nutrient.unit}</span>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>

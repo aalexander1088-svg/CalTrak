@@ -133,7 +133,7 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-[#F8F8F8]">
       {showConfetti && (
         <Confetti
           width={window.innerWidth}
@@ -145,10 +145,10 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
       
       <div className="container mx-auto px-4 py-6 max-w-4xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold gradient-text">Welcome, {username}!</h1>
-            <p className="text-slate-300 text-lg">Track your nutrition with voice input</p>
+            <h1 className="text-serif-heading">Welcome back, {username}!</h1>
+            <p className="text-caption mt-2">Track your nutrition goals today</p>
           </div>
           <div className="flex items-center space-x-3">
             {lastDeletedMeal && (
@@ -206,17 +206,17 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
                 onCancel={handleMealCancelled}
               />
             ) : (
-              <div className="card text-center accent-border">
-                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                  <Plus className="w-8 h-8 text-white" />
+              <div className="card text-center">
+                <div className="w-20 h-20 bg-[#4CAF50] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <Plus className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-heading mb-2">Add a Meal</h3>
-                <p className="text-slate-300 mb-4">
+                <h3 className="text-subheading mb-3">Add a Meal</h3>
+                <p className="text-body mb-6">
                   Use voice input to quickly log your meals and snacks
                 </p>
                 <button
                   onClick={() => setShowVoiceInput(true)}
-                  className="btn-primary w-full"
+                  className="btn-primary w-full mb-4"
                 >
                   Start Voice Input
                 </button>

@@ -166,13 +166,13 @@ const VoiceInput = ({ onMealAnalyzed, onError }) => {
 
   return (
     <div className="card text-center">
-      <div className="mb-6">
-        <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 transition-all duration-300 ${
+      <div className="mb-8">
+        <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 shadow-lg ${
           isListening 
             ? 'bg-red-500 animate-pulse' 
             : isAnalyzing 
             ? 'bg-yellow-500 animate-spin' 
-            : 'bg-blue-500 hover:bg-blue-600'
+            : 'bg-[#4CAF50] hover:bg-[#45A049]'
         }`}>
           {isAnalyzing ? (
             <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -191,11 +191,11 @@ const VoiceInput = ({ onMealAnalyzed, onError }) => {
           )}
         </div>
         
-        <h3 className="text-xl font-semibold text-slate-200 mb-2">
+        <h3 className="text-subheading mb-3">
           {isListening ? 'Listening...' : isAnalyzing ? 'Analyzing...' : 'Tap to Talk'}
         </h3>
         
-        <p className="text-slate-400 mb-4">
+        <p className="text-body mb-6">
           {isListening 
             ? 'Speak clearly about what you ate' 
             : isAnalyzing 
@@ -206,17 +206,17 @@ const VoiceInput = ({ onMealAnalyzed, onError }) => {
       </div>
 
       {transcript && (
-        <div className="bg-slate-800/50 rounded-lg p-4 mb-4">
-          <div className="flex items-start justify-between mb-2">
-            <h4 className="font-medium text-slate-200">Transcript:</h4>
+        <div className="bg-gray-50 rounded-xl p-4 mb-6">
+          <div className="flex items-start justify-between mb-3">
+            <h4 className="font-semibold text-gray-800">Transcript:</h4>
             <button
               onClick={clearTranscript}
-              className="text-slate-400 hover:text-slate-200"
+              className="text-gray-500 hover:text-gray-700"
             >
               <RotateCcw className="w-4 h-4" />
             </button>
           </div>
-          <p className="text-slate-300 text-left">{transcript}</p>
+          <p className="text-gray-700 text-left">{transcript}</p>
         </div>
       )}
 
