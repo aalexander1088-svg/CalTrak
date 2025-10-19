@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { User, Plus, LogIn } from 'lucide-react';
-import { getUserList, addUser, setCurrentUser } from '../utils/storage';
+import { User, Plus, LogIn, Trash2 } from 'lucide-react';
+import { getUserList, addUser, setCurrentUser, deleteUser } from '../utils/storage';
+import DeleteUserDialog from './DeleteUserDialog';
 
 const UserSelection = ({ onUserSelect }) => {
   const [users, setUsers] = useState(getUserList());
   const [showNewUserForm, setShowNewUserForm] = useState(false);
   const [newUsername, setNewUsername] = useState('');
   const [error, setError] = useState('');
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   const handleSelectUser = (username) => {
     setCurrentUser(username);
@@ -37,6 +40,26 @@ const UserSelection = ({ onUserSelect }) => {
     handleSelectUser(username);
   };
 
+  const handleDeleteUser = (username, e) => {
+    e.stopPropagation(); // Prevent user selection
+    setUserToDelete(username);
+    setShowDeleteDialog(true);
+  };
+
+  const confirmDeleteUser = () => {
+    if (userToDelete) {
+      deleteUser(userToDelete);
+      setUsers(getUserList());
+      setShowDeleteDialog(false);
+      setUserToDelete(null);
+    }
+  };
+
+  const cancelDeleteUser = () => {
+    setShowDeleteDialog(false);
+    setUserToDelete(null);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="card max-w-md w-full">
@@ -53,17 +76,35 @@ const UserSelection = ({ onUserSelect }) => {
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Select User</h2>
             <div className="space-y-2">
               {users.map((username) => (
-                <button
+                <div
                   key={username}
-                  onClick={() => handleSelectUser(username)}
-                  className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                  className="group flex items-center justify-between p-4 bg-slate-700/50 hover:bg-slate-600/50 rounded-lg transition-colors duration-200"
                 >
-                  <div className="flex items-center">
-                    <User className="w-5 h-5 text-gray-600 mr-3" />
-                    <span className="font-medium text-gray-900">{username}</span>
+                  <button
+                    onClick={() => handleSelectUser(username)}
+                    className="flex items-center flex-1"
+                  >
+                    <User className="w-5 h-5 text-slate-400 mr-3" />
+                    <span className="font-medium text-slate-200">{username}</span>
+                  </button>
+                  
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handleSelectUser(username)}
+                      className="p-2 text-slate-400 hover:text-slate-200 transition-colors"
+                      title="Login"
+                    >
+                      <LogIn className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={(e) => handleDeleteUser(username, e)}
+                      className="p-2 text-slate-400 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100"
+                      title="Delete user"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   </div>
-                  <LogIn className="w-5 h-5 text-gray-400" />
-                </button>
+                </div>
               ))}
             </div>
           </div>
@@ -118,6 +159,15 @@ const UserSelection = ({ onUserSelect }) => {
           </form>
         )}
       </div>
+
+      {/* Delete User Dialog */}
+      {showDeleteDialog && (
+        <DeleteUserDialog
+          username={userToDelete}
+          onConfirm={confirmDeleteUser}
+          onCancel={cancelDeleteUser}
+        />
+      )}
     </div>
   );
 };

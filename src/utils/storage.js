@@ -21,6 +21,26 @@ export const addUser = (username) => {
   }
 };
 
+export const deleteUser = (username) => {
+  // Remove from users list
+  const users = getUserList();
+  const updatedUsers = users.filter(user => user !== username);
+  localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(updatedUsers));
+  
+  // Remove user data
+  localStorage.removeItem(STORAGE_KEYS.GOALS(username));
+  localStorage.removeItem(STORAGE_KEYS.TODAY(username));
+  localStorage.removeItem(STORAGE_KEYS.HISTORY(username));
+  
+  // If this was the current user, clear current user
+  const currentUser = getCurrentUser();
+  if (currentUser === username) {
+    localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+  }
+  
+  return updatedUsers;
+};
+
 export const getCurrentUser = () => {
   return localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
 };
