@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Check, X, Edit3, Plus, Minus } from 'lucide-react';
+import { Check, X, Edit3, Plus, Minus, ArrowLeft, Loader } from 'lucide-react';
+import { handleFollowUpQuestion } from '../utils/claude';
 
 const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
   const [items, setItems] = useState(analysis.items || []);
   const [followUpQuestions, setFollowUpQuestions] = useState(analysis.followUpQuestions || []);
   const [isEditing, setIsEditing] = useState(null);
+  const [showFollowUp, setShowFollowUp] = useState(false);
+  const [followUpAnswers, setFollowUpAnswers] = useState({});
+  const [isProcessingFollowUp, setIsProcessingFollowUp] = useState(false);
 
   const updateItem = (index, field, value) => {
     const newItems = [...items];
@@ -58,6 +62,44 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
     });
   };
 
+  const handleAnswerFollowUp = async () => {
+    if (followUpQuestions.length === 0) return;
+    
+    setIsProcessingFollowUp(true);
+    try {
+      // Combine all questions and answers into a single prompt
+      const questionsAndAnswers = followUpQuestions.map((question, index) => {
+        const answer = followUpAnswers[index] || '';
+        return `Q: ${question}\nA: ${answer}`;
+      }).join('\n\n');
+      
+      const updatedAnalysis = await handleFollowUpQuestion(questionsAndAnswers, '');
+      
+      // Update the items with the new analysis
+      if (updatedAnalysis.items) {
+        setItems(updatedAnalysis.items);
+      }
+      
+      // Clear follow-up questions since they've been answered
+      setFollowUpQuestions([]);
+      setShowFollowUp(false);
+      setFollowUpAnswers({});
+      
+    } catch (error) {
+      console.error('Error processing follow-up:', error);
+      // Continue with current items if follow-up fails
+      setFollowUpQuestions([]);
+      setShowFollowUp(false);
+    } finally {
+      setIsProcessingFollowUp(false);
+    }
+  };
+
+  const handleSkipFollowUp = () => {
+    setFollowUpQuestions([]);
+    setShowFollowUp(false);
+  };
+
   const totals = calculateTotals();
 
   return (
@@ -72,14 +114,77 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
         </button>
       </div>
 
-      {followUpQuestions.length > 0 && (
+      {followUpQuestions.length > 0 && !showFollowUp && (
         <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
           <h3 className="font-medium text-yellow-400 mb-2">Follow-up Questions:</h3>
-          <ul className="text-sm text-yellow-300 space-y-1">
+          <ul className="text-sm text-yellow-300 space-y-1 mb-4">
             {followUpQuestions.map((question, index) => (
               <li key={index}>• {question}</li>
             ))}
           </ul>
+          <button
+            onClick={() => setShowFollowUp(true)}
+            className="btn-primary text-sm py-2 px-4"
+          >
+            Answer Questions
+          </button>
+        </div>
+      )}
+
+      {showFollowUp && followUpQuestions.length > 0 && (
+        <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-medium text-blue-400">Answer Follow-up Questions</h3>
+            <button
+              onClick={handleSkipFollowUp}
+              className="text-blue-400 hover:text-blue-300"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div className="space-y-4">
+            {followUpQuestions.map((question, index) => (
+              <div key={index}>
+                <label className="block text-sm font-medium text-blue-300 mb-2">
+                  {question}
+                </label>
+                <input
+                  type="text"
+                  value={followUpAnswers[index] || ''}
+                  onChange={(e) => setFollowUpAnswers(prev => ({
+                    ...prev,
+                    [index]: e.target.value
+                  }))}
+                  className="input-field"
+                  placeholder="Your answer..."
+                />
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex space-x-3 mt-4">
+            <button
+              onClick={handleSkipFollowUp}
+              className="flex-1 btn-secondary"
+            >
+              Skip Questions
+            </button>
+            <button
+              onClick={handleAnswerFollowUp}
+              disabled={isProcessingFollowUp}
+              className="flex-1 btn-primary flex items-center justify-center"
+            >
+              {isProcessingFollowUp ? (
+                <>
+                  <Loader className="w-4 h-4 mr-2 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                'Update Analysis'
+              )}
+            </button>
+          </div>
         </div>
       )}
 
