@@ -19,6 +19,7 @@ const GoalSetup = ({ username, onComplete }) => {
   const [showAIRecommendation, setShowAIRecommendation] = useState(false);
   const [isGettingRecommendations, setIsGettingRecommendations] = useState(false);
   const [userInfo, setUserInfo] = useState({
+    gender: 'male',
     weight: '',
     activityLevel: 'moderate',
     primaryGoal: 'maintenance',
@@ -146,9 +147,23 @@ const GoalSetup = ({ username, onComplete }) => {
               </button>
             ) : (
               <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Gender
+                  </label>
+                  <select
+                    value={userInfo.gender}
+                    onChange={(e) => setUserInfo(prev => ({ ...prev, gender: e.target.value }))}
+                    className="input-field"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-300 mb-2">
                       Your Weight (lbs)
                     </label>
                     <input
@@ -163,7 +178,7 @@ const GoalSetup = ({ username, onComplete }) => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-300 mb-2">
                       Activity Level
                     </label>
                     <select
@@ -179,7 +194,7 @@ const GoalSetup = ({ username, onComplete }) => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
                     Primary Goal
                   </label>
                   <select
@@ -195,7 +210,7 @@ const GoalSetup = ({ username, onComplete }) => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
                     Additional Notes (optional)
                   </label>
                   <textarea

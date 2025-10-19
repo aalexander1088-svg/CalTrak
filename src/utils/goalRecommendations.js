@@ -2,6 +2,7 @@
 const GOAL_RECOMMENDATION_PROMPT = `You are a nutrition expert. Based on the user's information, provide personalized daily nutrition goals.
 
 User Information:
+- Gender: {gender}
 - Weight: {weight} lbs
 - Activity Level: {activityLevel}
 - Primary Goal: {primaryGoal}
@@ -27,11 +28,13 @@ Guidelines:
 - For weight loss: moderate calorie deficit (300-500 below maintenance), adequate protein
 - For maintenance: balanced macros, maintenance calories
 - Consider activity level in calorie calculations
+- Consider gender differences in metabolism and nutritional needs
 - Provide practical, achievable targets`;
 
 export const getGoalRecommendations = async (userInfo) => {
   try {
     const prompt = GOAL_RECOMMENDATION_PROMPT
+      .replace('{gender}', userInfo.gender)
       .replace('{weight}', userInfo.weight)
       .replace('{activityLevel}', userInfo.activityLevel)
       .replace('{primaryGoal}', userInfo.primaryGoal)
