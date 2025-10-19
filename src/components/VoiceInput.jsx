@@ -165,22 +165,22 @@ const VoiceInput = ({ onMealAnalyzed, onError }) => {
   }
 
   return (
-    <div className="card text-center">
+    <div className="card text-center animate-slide-up">
       <div className="mb-8">
-        <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 shadow-lg ${
+        <div className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 shadow-lg hover-lift-glow ${
           isListening 
-            ? 'bg-red-500 animate-pulse' 
+            ? 'bg-red-500 loading-pulse' 
             : isAnalyzing 
-            ? 'bg-yellow-500 animate-spin' 
+            ? 'bg-yellow-500' 
             : 'bg-[#4CAF50] hover:bg-[#45A049]'
         }`}>
           {isAnalyzing ? (
-            <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full loading-spin"></div>
           ) : (
             <button
               onClick={isListening ? stopListening : startListening}
               disabled={isAnalyzing}
-              className="text-white"
+              className="text-white transition-fast"
             >
               {isListening ? (
                 <MicOff className="w-10 h-10" />

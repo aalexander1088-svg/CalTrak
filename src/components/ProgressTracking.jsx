@@ -23,9 +23,9 @@ const ProgressTracking = ({ goals, todayData, onDeleteMeal }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       {/* Progress Overview */}
-      <div className="progress-card">
+      <div className="progress-card hover-lift-glow">
         <div className="flex items-center mb-6">
           <Target className="w-6 h-6 text-[#4CAF50] mr-3" />
           <h2 className="text-subheading">Today's Progress</h2>
@@ -70,7 +70,7 @@ const ProgressTracking = ({ goals, todayData, onDeleteMeal }) => {
       </div>
 
       {/* Meal History */}
-      <div className="progress-card">
+      <div className="progress-card hover-lift-glow">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
             <Calendar className="w-6 h-6 text-[#4CAF50] mr-3" />

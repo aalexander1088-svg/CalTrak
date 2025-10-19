@@ -116,11 +116,11 @@ const GoalSetup = ({ username, onComplete }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center p-4 page-enter">
       <div className="card max-w-lg w-full">
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-[#4CAF50] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-            <Target className="w-10 h-10 text-white" />
+          <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
+            <img src="/logo.png" alt="CalTrak Logo" className="w-12 h-12" />
           </div>
           <h1 className="text-serif-heading mb-3">Set Your Goals</h1>
           <p className="text-caption">Configure your daily nutrition targets</p>
@@ -320,7 +320,7 @@ const GoalSetup = ({ username, onComplete }) => {
         <h2 className="text-subheading mb-6">Daily Targets</h2>
         <div className="space-y-4 mb-8">
           {nutrients.map((nutrient) => (
-            <div key={nutrient.key} className="goal-card">
+            <div key={nutrient.key} className="goal-card hover-lift-glow">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
                   <input

@@ -121,7 +121,7 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
   const totals = calculateTotals();
 
   return (
-    <div className="card">
+    <div className="card animate-slide-up">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-subheading">Confirm Your Meal</h2>
           <button
@@ -196,7 +196,7 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
 
         <div className="space-y-4 mb-8">
           {items.map((item, index) => (
-            <div key={index} className="meal-item-card">
+            <div key={index} className="meal-item-card hover-lift-glow">
             <div className="flex items-start justify-between mb-3">
               <div className="flex-1">
                 <h3 className="font-medium text-gray-900 mb-1">{item.name}</h3>

@@ -133,13 +133,15 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F8F8]">
+    <div className="min-h-screen bg-[#F8F8F8] page-enter">
       {showConfetti && (
         <Confetti
           width={window.innerWidth}
           height={window.innerHeight}
           recycle={false}
-          numberOfPieces={200}
+          numberOfPieces={300}
+          gravity={0.3}
+          initialVelocityY={20}
         />
       )}
       
@@ -206,9 +208,9 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
                 onCancel={handleMealCancelled}
               />
             ) : (
-              <div className="card text-center">
-                <div className="w-20 h-20 bg-[#4CAF50] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <Plus className="w-10 h-10 text-white" />
+              <div className="card text-center hover-lift-glow">
+                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
+                  <img src="/logo.png" alt="CalTrak Logo" className="w-12 h-12" />
                 </div>
                 <h3 className="text-subheading mb-3">Add a Meal</h3>
                 <p className="text-body mb-6">
@@ -216,7 +218,7 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
                 </p>
                 <button
                   onClick={() => setShowVoiceInput(true)}
-                  className="btn-primary w-full mb-4"
+                  className="btn-primary w-full mb-4 hover-lift"
                 >
                   Start Voice Input
                 </button>
