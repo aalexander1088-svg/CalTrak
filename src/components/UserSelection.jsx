@@ -64,16 +64,16 @@ const UserSelection = ({ onUserSelect }) => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="card max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <User className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">CalTrak</h1>
-          <p className="text-gray-600">Voice-based calorie tracking</p>
+          <h1 className="text-2xl font-bold text-slate-200 mb-2">CalTrak</h1>
+          <p className="text-slate-400">Voice-based calorie tracking</p>
         </div>
 
         {users.length > 0 && (
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Select User</h2>
+            <h2 className="text-lg font-semibold text-slate-200 mb-4">Select User</h2>
             <div className="space-y-2">
               {users.map((username) => (
                 <div
@@ -121,7 +121,7 @@ const UserSelection = ({ onUserSelect }) => {
         ) : (
           <form onSubmit={handleCreateUser} className="space-y-4">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="username" className="block text-sm font-medium text-slate-300 mb-2">
                 Username
               </label>
               <input
@@ -134,7 +134,7 @@ const UserSelection = ({ onUserSelect }) => {
                 autoFocus
               />
               {error && (
-                <p className="mt-2 text-sm text-red-600">{error}</p>
+                <p className="mt-2 text-sm text-red-400">{error}</p>
               )}
             </div>
             <div className="flex space-x-3">
