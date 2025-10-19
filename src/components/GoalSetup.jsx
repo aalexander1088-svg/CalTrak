@@ -117,7 +117,7 @@ const GoalSetup = ({ username, onComplete }) => {
 
   return (
     <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center p-4 page-enter">
-      <div className="card max-w-lg w-full">
+      <div className="card max-w-sm sm:max-w-lg w-full mx-4">
         <div className="text-center mb-8">
           <div className="w-24 h-16 bg-white rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
             <img src="/logo.png" alt="CalTrak Logo" className="w-20 h-12 object-contain" />

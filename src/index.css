@@ -5,6 +5,8 @@
 @layer base {
   html {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
   }
   
   body {
@@ -12,6 +14,16 @@
     min-height: 100vh;
     color: #1A1A1A;
     font-weight: 400;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  /* Mobile-first responsive design */
+  @media (max-width: 768px) {
+    body {
+      font-size: 16px;
+    }
   }
 }
 
@@ -19,6 +31,17 @@
   /* Primary Button - Vibrant Green */
   .btn-primary {
     @apply bg-[#4CAF50] hover:bg-[#45A049] text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 text-base;
+  }
+  
+  /* Mobile-optimized buttons */
+  @media (max-width: 768px) {
+    .btn-primary {
+      @apply py-3 px-6 text-sm;
+    }
+    
+    .btn-secondary {
+      @apply py-3 px-6 text-sm;
+    }
   }
   
   /* Secondary Button - Clean White */

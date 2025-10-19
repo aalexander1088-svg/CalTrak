@@ -61,19 +61,19 @@ const UserSelection = ({ onUserSelect }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center p-4 page-enter">
-      <div className="card max-w-md w-full">
-        <div className="text-center mb-8">
-          <div className="w-24 h-16 bg-white rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg hover-lift-glow">
-            <img src="/logo.png" alt="CalTrak Logo" className="w-20 h-12 object-contain" />
-          </div>
-          <h1 className="text-serif-heading mb-3">CalTrak</h1>
-          <p className="text-caption">Voice-based calorie tracking</p>
-        </div>
-
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 page-enter"
+      style={{
+        backgroundImage: 'url(/background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      <div className="card max-w-sm w-full mx-4">
         {users.length > 0 && (
           <div className="mb-8">
-            <h2 className="text-subheading mb-6">Select User</h2>
+            <h2 className="text-subheading mb-6 text-center">Select User</h2>
             <div className="space-y-3">
               {users.map((username) => (
                 <div
