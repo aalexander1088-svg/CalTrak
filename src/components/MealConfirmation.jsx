@@ -20,10 +20,34 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
     const newItems = [...items];
     const currentQuantity = parseInt(newItems[index].quantity) || 1;
     const newQuantity = Math.max(1, currentQuantity + delta); // Minimum 1, only whole numbers
-    newItems[index].quantity = newQuantity.toString();
+    
+    // Update quantity display
+    const originalQuantityText = analysis.items[index].quantity; // e.g., "1 cup" or "1 cup (245g)"
+    const baseQuantity = parseInt(originalQuantityText) || 1; // Extract base number (1 from "1 cup")
+    
+    // Create new quantity text based on the original format
+    let newQuantityText;
+    if (originalQuantityText.includes('(')) {
+      // Format: "1 cup (245g)" -> "2 cups (490g)"
+      const unit = originalQuantityText.split('(')[0].trim().replace(/^\d+\s*/, ''); // Extract "cup" or "cups"
+      const weightMatch = originalQuantityText.match(/\((\d+)g\)/);
+      if (weightMatch) {
+        const baseWeight = parseInt(weightMatch[1]);
+        const newWeight = baseWeight * newQuantity;
+        newQuantityText = `${newQuantity} ${unit}${newQuantity > 1 ? 's' : ''} (${newWeight}g)`;
+      } else {
+        newQuantityText = `${newQuantity} ${unit}${newQuantity > 1 ? 's' : ''}`;
+      }
+    } else {
+      // Format: "1 cup" -> "2 cups"
+      const unit = originalQuantityText.replace(/^\d+\s*/, ''); // Extract "cup"
+      newQuantityText = `${newQuantity} ${unit}${newQuantity > 1 ? 's' : ''}`;
+    }
+    
+    newItems[index].quantity = newQuantityText;
     
     // Recalculate nutrition based on quantity multiplier
-    const multiplier = newQuantity / (parseFloat(analysis.items[index].quantity) || 1);
+    const multiplier = newQuantity / baseQuantity;
     newItems[index].calories = Math.round(analysis.items[index].calories * multiplier);
     newItems[index].protein = Math.round(analysis.items[index].protein * multiplier * 10) / 10;
     newItems[index].carbs = Math.round(analysis.items[index].carbs * multiplier * 10) / 10;
