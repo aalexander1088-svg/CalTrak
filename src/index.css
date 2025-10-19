@@ -20,7 +20,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0;
+    @apply bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0;
   }
   
   .btn-secondary {
@@ -36,7 +36,7 @@
   }
   
   .input-field {
-    @apply w-full px-4 py-3 bg-slate-800/60 border border-slate-700/50 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 hover:border-slate-600 text-slate-300 placeholder-slate-500 backdrop-blur-sm;
+    @apply w-full px-4 py-3 bg-slate-800/60 border border-slate-700/50 rounded-lg focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all duration-200 hover:border-slate-600 text-slate-200 placeholder-slate-500 backdrop-blur-sm;
   }
   
   .progress-bar {
@@ -70,14 +70,30 @@
   }
   
   .text-primary {
-    @apply text-slate-300;
+    @apply text-slate-100;
   }
   
   .text-secondary {
-    @apply text-slate-500;
+    @apply text-slate-400;
   }
   
   .text-accent {
-    @apply text-emerald-400;
+    @apply text-emerald-300;
+  }
+  
+  .text-heading {
+    @apply text-slate-100 font-bold;
+  }
+  
+  .text-subheading {
+    @apply text-slate-200 font-semibold;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent font-bold;
+  }
+  
+  .accent-border {
+    @apply border border-emerald-400/30 shadow-lg shadow-emerald-400/10;
   }
 }

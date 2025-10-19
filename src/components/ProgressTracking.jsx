@@ -27,8 +27,8 @@ const ProgressTracking = ({ goals, todayData, onDeleteMeal }) => {
       {/* Progress Overview */}
       <div className="card">
         <div className="flex items-center mb-4">
-          <Target className="w-6 h-6 text-blue-600 mr-2" />
-          <h2 className="text-xl font-semibold text-gray-900">Today's Progress</h2>
+          <Target className="w-6 h-6 text-emerald-400 mr-2" />
+          <h2 className="text-xl font-bold text-heading">Today's Progress</h2>
         </div>
         
         <div className="space-y-4">
@@ -73,10 +73,10 @@ const ProgressTracking = ({ goals, todayData, onDeleteMeal }) => {
       <div className="card">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
-            <Calendar className="w-6 h-6 text-blue-600 mr-2" />
-            <h2 className="text-xl font-semibold text-gray-900">Today's Meals</h2>
+            <Calendar className="w-6 h-6 text-emerald-400 mr-2" />
+            <h2 className="text-xl font-bold text-heading">Today's Meals</h2>
           </div>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-slate-400">
             {todayData.meals.length} meal{todayData.meals.length !== 1 ? 's' : ''}
           </span>
         </div>

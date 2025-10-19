@@ -5,6 +5,7 @@ export const STORAGE_KEYS = {
   GOALS: (username) => `caltrak_${username}_goals`,
   TODAY: (username) => `caltrak_${username}_today`,
   HISTORY: (username) => `caltrak_${username}_history`,
+  RECENT_MEALS: (username) => `caltrak_${username}_recent_meals`,
 };
 
 // User management functions
@@ -119,6 +120,16 @@ export const addMeal = (username, meal) => {
   todayData.totals.carbs += meal.totals.carbs;
   todayData.totals.fat += meal.totals.fat;
   
+  // Add to recent meals for quick add
+  addRecentMeal(username, {
+    ...newMeal,
+    name: meal.name || 'Recent Meal',
+    totalCalories: meal.totals.calories,
+    totalProtein: meal.totals.protein,
+    totalCarbs: meal.totals.carbs,
+    totalFat: meal.totals.fat
+  });
+  
   saveTodayData(username, todayData);
   return newMeal;
 };
@@ -172,4 +183,42 @@ export const getProgressColor = (progress) => {
   if (progress >= 100) return 'bg-red-500';
   if (progress >= 80) return 'bg-yellow-500';
   return 'bg-green-500';
+};
+
+// Recent meals management
+export const getRecentMeals = (username) => {
+  const recentMeals = localStorage.getItem(STORAGE_KEYS.RECENT_MEALS(username));
+  return recentMeals ? JSON.parse(recentMeals) : [];
+};
+
+export const addRecentMeal = (username, mealData) => {
+  const recentMeals = getRecentMeals(username);
+  
+  // Create a simplified version for quick add
+  const simplifiedMeal = {
+    id: mealData.id,
+    name: mealData.name || 'Recent Meal',
+    items: mealData.items,
+    totalCalories: mealData.totalCalories,
+    totalProtein: mealData.totalProtein,
+    totalCarbs: mealData.totalCarbs,
+    totalFat: mealData.totalFat,
+    timestamp: new Date().toISOString()
+  };
+  
+  // Remove if already exists (to avoid duplicates)
+  const filteredMeals = recentMeals.filter(meal => meal.id !== simplifiedMeal.id);
+  
+  // Add to beginning and keep only last 10
+  const updatedMeals = [simplifiedMeal, ...filteredMeals].slice(0, 10);
+  
+  localStorage.setItem(STORAGE_KEYS.RECENT_MEALS(username), JSON.stringify(updatedMeals));
+  return updatedMeals;
+};
+
+export const removeRecentMeal = (username, mealId) => {
+  const recentMeals = getRecentMeals(username);
+  const updatedMeals = recentMeals.filter(meal => meal.id !== mealId);
+  localStorage.setItem(STORAGE_KEYS.RECENT_MEALS(username), JSON.stringify(updatedMeals));
+  return updatedMeals;
 };

@@ -4,6 +4,7 @@ import Confetti from 'react-confetti';
 import VoiceInput from './VoiceInput';
 import MealConfirmation from './MealConfirmation';
 import ProgressTracking from './ProgressTracking';
+import QuickAdd from './QuickAdd';
 import { 
   getUserGoals, 
   getTodayData, 
@@ -132,8 +133,8 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Welcome, {username}!</h1>
-            <p className="text-gray-600">Track your nutrition with voice input</p>
+            <h1 className="text-3xl font-bold gradient-text">Welcome, {username}!</h1>
+            <p className="text-slate-300 text-lg">Track your nutrition with voice input</p>
           </div>
           <div className="flex items-center space-x-3">
             {lastDeletedMeal && (
@@ -191,12 +192,12 @@ const Dashboard = ({ username, onLogout, onSettings }) => {
                 onCancel={handleMealCancelled}
               />
             ) : (
-              <div className="card text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Plus className="w-8 h-8 text-blue-600" />
+              <div className="card text-center accent-border">
+                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Plus className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Add a Meal</h3>
-                <p className="text-gray-600 mb-4">
+                <h3 className="text-xl font-bold text-heading mb-2">Add a Meal</h3>
+                <p className="text-slate-300 mb-4">
                   Use voice input to quickly log your meals and snacks
                 </p>
                 <button
