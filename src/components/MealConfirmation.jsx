@@ -14,8 +14,8 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
 
   const adjustQuantity = (index, delta) => {
     const newItems = [...items];
-    const currentQuantity = parseFloat(newItems[index].quantity) || 1;
-    const newQuantity = Math.max(0.1, currentQuantity + delta);
+    const currentQuantity = parseInt(newItems[index].quantity) || 1;
+    const newQuantity = Math.max(1, currentQuantity + delta); // Minimum 1, only whole numbers
     newItems[index].quantity = newQuantity.toString();
     
     // Recalculate nutrition based on quantity multiplier
@@ -63,19 +63,19 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
   return (
     <div className="card">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Confirm Your Meal</h2>
+        <h2 className="text-xl font-bold text-heading">Confirm Your Meal</h2>
         <button
           onClick={onCancel}
-          className="text-gray-400 hover:text-gray-600"
+          className="text-slate-400 hover:text-slate-200"
         >
           <X className="w-6 h-6" />
         </button>
       </div>
 
       {followUpQuestions.length > 0 && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-          <h3 className="font-medium text-yellow-800 mb-2">Follow-up Questions:</h3>
-          <ul className="text-sm text-yellow-700 space-y-1">
+        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
+          <h3 className="font-medium text-yellow-400 mb-2">Follow-up Questions:</h3>
+          <ul className="text-sm text-yellow-300 space-y-1">
             {followUpQuestions.map((question, index) => (
               <li key={index}>• {question}</li>
             ))}
@@ -114,14 +114,14 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
                   <button
-                    onClick={() => adjustQuantity(index, -0.1)}
+                    onClick={() => adjustQuantity(index, -1)}
                     className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
                   <span className="font-medium">{item.quantity}</span>
                   <button
-                    onClick={() => adjustQuantity(index, 0.1)}
+                    onClick={() => adjustQuantity(index, 1)}
                     className="w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center"
                   >
                     <Plus className="w-4 h-4" />
