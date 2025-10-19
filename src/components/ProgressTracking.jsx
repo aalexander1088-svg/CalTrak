@@ -25,10 +25,10 @@ const ProgressTracking = ({ goals, todayData, onDeleteMeal }) => {
   return (
     <div className="space-y-6">
       {/* Progress Overview */}
-      <div className="card">
-        <div className="flex items-center mb-4">
-          <Target className="w-6 h-6 text-emerald-400 mr-2" />
-          <h2 className="text-xl font-bold text-heading">Today's Progress</h2>
+      <div className="progress-card">
+        <div className="flex items-center mb-6">
+          <Target className="w-6 h-6 text-[#4CAF50] mr-3" />
+          <h2 className="text-subheading">Today's Progress</h2>
         </div>
         
         <div className="space-y-4">
@@ -40,11 +40,11 @@ const ProgressTracking = ({ goals, todayData, onDeleteMeal }) => {
             const progress = calculateProgress(current, goal);
             
             return (
-              <div key={nutrient.key} className="space-y-2">
+              <div key={nutrient.key} className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <span className="text-lg mr-2">{nutrient.icon}</span>
-                    <span className="font-medium text-gray-900">{nutrient.label}</span>
+                    <span className="text-lg mr-3">{nutrient.icon}</span>
+                    <span className="text-body font-semibold">{nutrient.label}</span>
                   </div>
                   <div className={`font-semibold ${getProgressTextColor(progress)}`}>
                     {current.toFixed(nutrient.key === 'calories' ? 0 : 1)} / {goal} {nutrient.unit}
@@ -70,13 +70,13 @@ const ProgressTracking = ({ goals, todayData, onDeleteMeal }) => {
       </div>
 
       {/* Meal History */}
-      <div className="card">
-        <div className="flex items-center justify-between mb-4">
+      <div className="progress-card">
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
-            <Calendar className="w-6 h-6 text-emerald-400 mr-2" />
-            <h2 className="text-xl font-bold text-heading">Today's Meals</h2>
+            <Calendar className="w-6 h-6 text-[#4CAF50] mr-3" />
+            <h2 className="text-subheading">Today's Meals</h2>
           </div>
-          <span className="text-sm text-slate-400">
+          <span className="text-caption">
             {todayData.meals.length} meal{todayData.meals.length !== 1 ? 's' : ''}
           </span>
         </div>

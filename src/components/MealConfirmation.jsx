@@ -122,20 +122,20 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
 
   return (
     <div className="card">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-heading">Confirm Your Meal</h2>
-        <button
-          onClick={onCancel}
-          className="text-slate-400 hover:text-slate-200"
-        >
-          <X className="w-6 h-6" />
-        </button>
-      </div>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-subheading">Confirm Your Meal</h2>
+          <button
+            onClick={onCancel}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
 
       {followUpQuestions.length > 0 && (
-        <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 mb-6">
-          <h3 className="font-medium text-yellow-400 mb-2">Follow-up Questions:</h3>
-          <ul className="text-sm text-yellow-300 space-y-1 mb-4">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8">
+          <h3 className="font-semibold text-yellow-800 mb-3">Follow-up Questions:</h3>
+          <ul className="text-sm text-yellow-700 space-y-2 mb-6">
             {followUpQuestions.map((question, index) => (
               <li key={index}>• {question}</li>
             ))}
@@ -194,9 +194,9 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
         </div>
       )}
 
-      <div className="space-y-4 mb-6">
-        {items.map((item, index) => (
-          <div key={index} className="bg-gray-50 rounded-lg p-4">
+        <div className="space-y-4 mb-8">
+          {items.map((item, index) => (
+            <div key={index} className="meal-item-card">
             <div className="flex items-start justify-between mb-3">
               <div className="flex-1">
                 <h3 className="font-medium text-gray-900 mb-1">{item.name}</h3>
@@ -208,13 +208,13 @@ const MealConfirmation = ({ analysis, onConfirm, onCancel, onEditItem }) => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => setIsEditing(isEditing === index ? null : index)}
-                  className="text-blue-600 hover:text-blue-800"
+                  className="text-[#4CAF50] hover:text-[#45A049] p-2 rounded-lg hover:bg-gray-50"
                 >
                   <Edit3 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => removeItem(index)}
-                  className="text-red-600 hover:text-red-800"
+                  className="text-red-500 hover:text-red-600 p-2 rounded-lg hover:bg-gray-50"
                 >
                   <X className="w-4 h-4" />
                 </button>
